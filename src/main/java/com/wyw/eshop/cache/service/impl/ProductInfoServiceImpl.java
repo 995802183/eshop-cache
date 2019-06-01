@@ -14,7 +14,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     private ProductInfoMapper productInfoMapper;
 
     @Override
-    public ProductInfo getProductInfo(Integer productInfoId){
+    public ProductInfo getProductInfo(Integer productInfoId) {
         return productInfoMapper.selectByPrimaryKey(productInfoId);
     }
 }

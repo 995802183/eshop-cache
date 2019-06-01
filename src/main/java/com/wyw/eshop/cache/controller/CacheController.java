@@ -18,29 +18,29 @@ public class CacheController {
     private CacheService cacheService;
 
     @RequestMapping("/testPutCache")
-    public String testPutCache(ProductInfo productInfo){
+    public String testPutCache(ProductInfo productInfo) {
         cacheService.saveLocalCache(productInfo);
         return "success";
     }
 
     @RequestMapping("/testGetCache")
-    public ProductInfo testGetCache(Integer id){
+    public ProductInfo testGetCache(Integer id) {
         return cacheService.getLocalCache(id);
     }
 
 
     @RequestMapping("/getProductInfo")
-    public ProductInfo getProductInfo(Integer productId){
+    public ProductInfo getProductInfo(Integer productId) {
         ProductInfo productInfo = null;
         productInfo = cacheService.getProductInfoFromRedisCache(productId);
-        logger.info("redis cache productInfo:"+productInfo);
+        logger.info("redis cache productInfo:" + productInfo);
 
-        if(ObjectUtils.isEmpty(productInfo)){
+        if (ObjectUtils.isEmpty(productInfo)) {
             productInfo = cacheService.getProductInfoFromLocalCache(productId);
-            logger.info("local cache productInfo:"+productInfo);
+            logger.info("local cache productInfo:" + productInfo);
         }
 
-        if(ObjectUtils.isEmpty(productInfo)){
+        if (ObjectUtils.isEmpty(productInfo)) {
 
         }
 
@@ -48,15 +48,15 @@ public class CacheController {
     }
 
     @RequestMapping("/getShopInfo")
-    public ShopInfo getShopInfo(Integer shopId){
+    public ShopInfo getShopInfo(Integer shopId) {
         ShopInfo shopInfo = null;
         shopInfo = cacheService.getShopInfoFromRedisCache(shopId);
 
-        if(ObjectUtils.isEmpty(shopInfo)){
+        if (ObjectUtils.isEmpty(shopInfo)) {
             shopInfo = cacheService.getShopInfoFromLocalCache(shopId);
         }
 
-        if(ObjectUtils.isEmpty(shopInfo)){
+        if (ObjectUtils.isEmpty(shopInfo)) {
 
         }
 

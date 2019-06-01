@@ -54,12 +54,12 @@ public class Configure {
     }
 
     @Bean
-    public LettuceConnectionFactory redisConnectionFactory(){
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("127.0.0.1",6379));
+    public LettuceConnectionFactory redisConnectionFactory() {
+        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("127.0.0.1", 6379));
     }
 
     @Bean
-    public ServletListenerRegistrationBean servletListenerRegistrationBean(){
+    public ServletListenerRegistrationBean servletListenerRegistrationBean() {
         ServletListenerRegistrationBean<EventListener> eventListenerServletListenerRegistrationBean
                 = new ServletListenerRegistrationBean<>();
         eventListenerServletListenerRegistrationBean.setListener(new InitListener());

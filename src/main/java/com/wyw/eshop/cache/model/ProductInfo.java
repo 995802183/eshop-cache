@@ -1,6 +1,7 @@
 package com.wyw.eshop.cache.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.*;
 
 @Table(name = "product_info")
@@ -33,6 +34,9 @@ public class ProductInfo implements Serializable {
 
     @Column(name = "shop_id")
     private Integer shopId;
+
+    @Column(name = "create_time")
+    private LocalDateTime createTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -162,18 +166,17 @@ public class ProductInfo implements Serializable {
         this.shopId = shopId;
     }
 
-    @Override
-    public String toString() {
-        return "ProductInfo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", pictures='" + pictures + '\'' +
-                ", specification='" + specification + '\'' +
-                ", service='" + service + '\'' +
-                ", color='" + color + '\'' +
-                ", size='" + size + '\'' +
-                ", shopId=" + shopId +
-                '}';
+    /**
+     * @return create_time
+     */
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * @param createTime
+     */
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 }

@@ -11,7 +11,7 @@
         <jsr107:defaults enable-management="false" enable-statistics="true"/>
     </service>
 
-    <cache alias="local" uses-template="heap-cache" />
+    <cache alias="local" uses-template="heap-cache"/>
 
     <cache-template name="heap-cache">
         <heap unit="entries">2000</heap>

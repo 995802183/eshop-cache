@@ -5,10 +5,10 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CacheKafkaConsumer{
+public class CacheKafkaConsumer {
 
-    @KafkaListener(id = "infoChange" , topics = "infoChange" )
-    private void listener(ConsumerRecord<String,String> consumerRecord){
+    @KafkaListener(id = "infoChange", topics = "infoChange")
+    private void listener(ConsumerRecord<String, String> consumerRecord) {
         new Thread(new KafkaMessageProcessor(consumerRecord)).start();
     }
 }

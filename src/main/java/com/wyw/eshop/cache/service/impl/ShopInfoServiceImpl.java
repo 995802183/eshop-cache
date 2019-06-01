@@ -13,7 +13,7 @@ public class ShopInfoServiceImpl implements ShopInfoService {
     private ShopInfoMapper shopInfoMapper;
 
     @Override
-    public ShopInfo getShopInfo(Integer shopInfoId){
+    public ShopInfo getShopInfo(Integer shopInfoId) {
         return shopInfoMapper.selectByPrimaryKey(shopInfoId);
     }
 }

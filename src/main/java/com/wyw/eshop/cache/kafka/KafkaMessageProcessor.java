@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class KafkaMessageProcessor implements Runnable {
     private Logger logger = LoggerFactory.getLogger(KafkaMessageProcessor.class);
 
-    private ConsumerRecord<String,String> consumerRecord;
+    private ConsumerRecord<String, String> consumerRecord;
     private CacheService cacheService;
     private ProductInfoService productInfoService;
     private ShopInfoService shopInfoService;
@@ -31,24 +31,24 @@ public class KafkaMessageProcessor implements Runnable {
     @Override
     public void run() {
         String message = consumerRecord.value();
-        logger.info("received message is : "+message);
+        logger.info("received message is : " + message);
         JSONObject messageJsonObject = JSONObject.parseObject(message);
         String serviceId = messageJsonObject.getString("serviceId");
-        if(StringUtils.equals(serviceId,"productInfoService")){
+        if (StringUtils.equals(serviceId, "productInfoService")) {
             processProductInfoChangeMessage(messageJsonObject);
-        }else if (StringUtils.equals(serviceId,"shopInfoService")){
+        } else if (StringUtils.equals(serviceId, "shopInfoService")) {
             processShopInfoChangeMessage(messageJsonObject);
         }
     }
 
-    private void processProductInfoChangeMessage(JSONObject messageJsonObject){
+    private void processProductInfoChangeMessage(JSONObject messageJsonObject) {
         Integer productId = messageJsonObject.getInteger("productId");
         ProductInfo productInfo = productInfoService.getProductInfo(productId);
         cacheService.saveProductInfo2LocalCache(productInfo);
         cacheService.saveProductInfo2RedisCache(productInfo);
     }
 
-    private void processShopInfoChangeMessage(JSONObject messageJsonObject){
+    private void processShopInfoChangeMessage(JSONObject messageJsonObject) {
         Integer productId = messageJsonObject.getInteger("productId");
         Integer shopId = messageJsonObject.getInteger("shopId");
         ShopInfo shopInfo = shopInfoService.getShopInfo(shopId);
