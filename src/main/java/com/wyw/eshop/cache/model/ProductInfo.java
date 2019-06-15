@@ -38,6 +38,9 @@ public class ProductInfo implements Serializable {
     @Column(name = "create_time")
     private LocalDateTime createTime;
 
+    @Column(name = "modify_time")
+    private LocalDateTime modifyTime;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -178,5 +181,13 @@ public class ProductInfo implements Serializable {
      */
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public LocalDateTime getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(LocalDateTime modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }

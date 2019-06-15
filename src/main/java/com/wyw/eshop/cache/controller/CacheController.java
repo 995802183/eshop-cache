@@ -2,7 +2,9 @@ package com.wyw.eshop.cache.controller;
 
 import com.wyw.eshop.cache.model.ProductInfo;
 import com.wyw.eshop.cache.model.ShopInfo;
+import com.wyw.eshop.cache.rebuild.ReBuildCacheQueue;
 import com.wyw.eshop.cache.service.CacheService;
+import com.wyw.eshop.cache.service.ProductInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class CacheController {
 
     @Autowired
     private CacheService cacheService;
+    @Autowired
+    private ProductInfoService productInfoService;
 
     @RequestMapping("/testPutCache")
     public String testPutCache(ProductInfo productInfo) {
@@ -41,7 +45,9 @@ public class CacheController {
         }
 
         if (ObjectUtils.isEmpty(productInfo)) {
-
+            productInfo = productInfoService.getProductInfo(productId);
+            ReBuildCacheQueue reBuiildCacheQueue = ReBuildCacheQueue.getInstance();
+            reBuiildCacheQueue.putProductInfo(productInfo);
         }
 
         return productInfo;
